@@ -13,7 +13,7 @@ declare module '@vue/runtime-core' {
 export default {
 	install(app: App) {
 		app.use(router)
-		app.config.globalProperties.$http = axios
+		app.config.globalProperties.$http = axios // 定义一个全局方法
 		this.mixins(app)
 	},
 	mixins(app: App) {
