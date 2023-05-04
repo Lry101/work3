@@ -18,8 +18,8 @@ export default defineComponent({
 	setup() {
 		// vue3中无法再使用this，调用全局方法需要使用👇getCurrentInstance：
 		const { proxy }: any = getCurrentInstance()
-		// 声明一个类型为任意类型的数组用以接收axios请求回来的数据：
-		const users = ref<any[]>([])
+		// 声明一个类型为任意类型的数组用以接收axios请求回来的数据，一定要写在onMounted钩子函数外：
+		let users = ref<any[]>([])
 		// 👇onMounted--生命周期钩子，组件挂载完成后执行：
 		onMounted(() => {
 			proxy.$http.get('/index.json').then((result: any) => {
@@ -29,7 +29,7 @@ export default defineComponent({
 				}
 				console.log(result.data);
 				users.value = result.data
-				// console.log(users.value);
+				console.log(users.value);
 			})
 		})
 		return {
